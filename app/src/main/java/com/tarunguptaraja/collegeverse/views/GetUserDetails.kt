@@ -3,13 +3,16 @@ package com.tarunguptaraja.collegeverse.views
 import android.app.DatePickerDialog
 import android.app.DatePickerDialog.OnDateSetListener
 import android.content.Intent
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import androidx.appcompat.app.AppCompatActivity
+import com.google.gson.Gson
 import com.tarunguptaraja.collegeverse.R
 import com.tarunguptaraja.collegeverse.databinding.ActivityGetUserDetailsBinding
+import com.tarunguptaraja.collegeverse.model.User
 import com.tarunguptaraja.collegeverse.viewmodel.UserDetailsViewmodel
 import kotlinx.coroutines.runBlocking
 import java.text.SimpleDateFormat
@@ -29,9 +32,18 @@ class GetUserDetails : AppCompatActivity() {
 
         val viewModel = UserDetailsViewmodel()
 
+        val sharedPreferences: SharedPreferences =
+            applicationContext.getSharedPreferences("MySharedPref", MODE_PRIVATE)
+
         val temp = runBlocking { viewModel.isRegistered() }
         if (temp) {
             println("it's a returning user")
+            val user: User = viewModel.getUser()
+            val editor: SharedPreferences.Editor = sharedPreferences.edit()
+            val gson = Gson()
+            val json = gson.toJson(user)
+            editor.putString("USER", json)
+            editor.apply()
             startActivity(Intent(this, PendingActivity::class.java))
             finish()
         } else {
@@ -183,7 +195,6 @@ class GetUserDetails : AppCompatActivity() {
             val city = viewBinding.city.text
             val district = viewBinding.district.text
             val pincode = viewBinding.pincode.text
-            var yoa: Year = Year.now()
             var iserror = false
 
             if (isStudent) {
@@ -201,7 +212,6 @@ class GetUserDetails : AppCompatActivity() {
             }
             if (year.isNotEmpty()) {
                 try {
-                    yoa = Year.of(year.toString().toInt())
                     if (year.toString().toInt()
                         < viewModel.dob.year
                     ) {
@@ -209,13 +219,13 @@ class GetUserDetails : AppCompatActivity() {
                             "addmission year cannot be less then your dob cannot be empty"
                         viewBinding.error.visibility = View.VISIBLE
                         iserror=true
-                    } else if (yoa > Year.now()) {
+                    } else if (year.toString().toInt() > Year.now().toString().toInt()) {
                         viewBinding.error.text =
                             "addmission year cannot be greater then current year cannot be empty"
                         viewBinding.error.visibility = View.VISIBLE
                         iserror=true
                     } else {
-                        viewModel.yoa = yoa
+                        viewModel.yoa = year.toString().toInt()
                     }
                 } catch (e: java.lang.Exception) {
                     viewBinding.error.text = "addmission year is not correct"
@@ -267,7 +277,12 @@ class GetUserDetails : AppCompatActivity() {
                 viewModel.city = city.toString()
                 viewModel.district = district.toString()
                 viewModel.pincode = pincode.toString().toInt()
-                runBlocking { viewModel.uploadUser() }
+                val user:User = runBlocking { viewModel.uploadUser() }
+                val editor: SharedPreferences.Editor = sharedPreferences.edit()
+                val gson = Gson()
+                val json = gson.toJson(user)
+                editor.putString("USER", json)
+                editor.apply()
                 startActivity(Intent(applicationContext, PendingActivity::class.java))
                 finish()
             }
