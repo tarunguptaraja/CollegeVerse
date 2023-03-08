@@ -197,6 +197,14 @@ class GetUserDetails : AppCompatActivity() {
             val pincode = viewBinding.pincode.text
             var iserror = false
 
+            val calender: Calendar = Calendar.getInstance()
+            var currentYear: Int = calender.get(Calendar.YEAR) - year.toString().toInt()
+            var currentSem:Int=(currentYear*2)+sem.toString().toInt()
+            if (calender.get(Calendar.MONTH) < 7) {
+                currentSem -= 1
+            }
+            currentYear= (currentSem+1)/2
+
             if (isStudent) {
                 if (sem.isEmpty()) {
                     viewBinding.error.text = "Admission Semester cannot be empty"

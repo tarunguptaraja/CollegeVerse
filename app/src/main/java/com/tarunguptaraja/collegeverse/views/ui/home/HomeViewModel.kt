@@ -23,14 +23,19 @@ class HomeViewModel : ViewModel() {
     suspend fun getTimetable(): ArrayList<timetable> {
         val calender: Calendar = Calendar.getInstance()
         val day = calender.get(Calendar.DAY_OF_WEEK)-1
-        var year: Int = calender.get(Calendar.YEAR) - user.admissionYear
-        if (calender.get(Calendar.MONTH) > 7) {
-            year += 1
+        var year: Int = calender.get(Calendar.YEAR) - user.admissionYear.toString().toInt()
+        var currentSem:Int=(year*2)+user.admissionSemester.toString().toInt()
+        if (calender.get(Calendar.MONTH) < 7) {
+            currentSem -= 1
         }
+        year= (currentSem+1)/2
         arrayList.clear()
-        val temp: Task<QuerySnapshot> =
+        val temp: Task<QuerySnapshot> = if(user.role=="Student"){
             db.collection("timetable").whereEqualTo("day", days[day]).whereEqualTo("year", year)
                 .whereEqualTo("branch", user.branch).get()
+        }else{
+            db.collection("timetable").whereEqualTo("day",days[day]).whereEqualTo("facultyId",user.facultyId).get()
+        }
         temp.await()
         val res: MutableList<DocumentSnapshot> = temp.result.documents
         for (doc in res) {

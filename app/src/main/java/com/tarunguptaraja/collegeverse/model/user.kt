@@ -1,7 +1,7 @@
 package com.tarunguptaraja.collegeverse.model
 
 import com.google.firebase.Timestamp
-import java.time.Year
+import java.io.Serializable
 import java.util.*
 
 
@@ -10,8 +10,8 @@ data class User(
     val name: String,
     val phoneNumber: String,
     val role: String,
-    val studentId: String?,
-    val facultyId: String?,
+    var studentId: String?,
+    var facultyId: String?,
     val father: String,
     val mother: String,
     val email: String,
@@ -28,9 +28,9 @@ data class User(
     val district: String,
     val pincode: Int,
     val state: String,
-    val status: String,
+    var status: String,
     val timestamp: Timestamp
-) {
+) : Serializable {
     constructor() : this(
         "",
         "",
@@ -52,6 +52,9 @@ data class User(
         null,
         "",
         "",
-        0, "", "", Timestamp.now()
+        0,
+        "",
+        "",
+        Timestamp.now()
     )
 }

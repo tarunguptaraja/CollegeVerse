@@ -1,55 +1,53 @@
-package com.tarunguptaraja.collegeverse.views.ui.home
+package com.tarunguptaraja.collegeverse.views.ui.request
 
+import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.gson.Gson
-import com.tarunguptaraja.collegeverse.adapters.TimeTableAdapter
-import com.tarunguptaraja.collegeverse.databinding.FragmentHomeBinding
+import com.tarunguptaraja.collegeverse.adapters.RequestAdapter
+import com.tarunguptaraja.collegeverse.databinding.FragmentRequestBinding
 import com.tarunguptaraja.collegeverse.model.User
+import com.tarunguptaraja.collegeverse.views.RequestVerificationActivity
 import kotlinx.coroutines.runBlocking
 
+class RequestFragment : Fragment(), RequestAdapter.RequestItemClicked {
 
-class HomeFragment : Fragment() {
-
-    private var viewBinding: FragmentHomeBinding? = null
+    private var viewBinding: FragmentRequestBinding? = null
 
     // This property is only valid between onCreateView and
     // onDestroyView.
     private val binding get() = viewBinding!!
-    private var shouldRefreshOnResume=false
-
+    private lateinit var gson:Gson
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val homeViewModel = ViewModelProvider(this)[HomeViewModel::class.java]
+        val viewModel =
+            ViewModelProvider(this)[RequestViewModel::class.java]
 
-        viewBinding = FragmentHomeBinding.inflate(inflater, container, false)
+        viewBinding = FragmentRequestBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
         val sharedPreferences: SharedPreferences =
             context!!.getSharedPreferences("MySharedPref", AppCompatActivity.MODE_PRIVATE)
-        val gson = Gson()
+        gson = Gson()
         val json: String? = sharedPreferences.getString("USER", "")
         val user: User = gson.fromJson(json, User::class.java)
-        homeViewModel.user=user
+        viewModel.user=user
 
+        binding.recycleView.layoutManager= LinearLayoutManager(context)
 
-        binding.recycleView.layoutManager = LinearLayoutManager(context)
-
-        val data = runBlocking { homeViewModel.getTimetable() }
-        val adapter=TimeTableAdapter(data)
-
+        val data = runBlocking { viewModel.getRequests() }
+        val adapter = RequestAdapter(data,this)
         binding.recycleView.adapter=adapter
 
 
@@ -59,5 +57,12 @@ class HomeFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         viewBinding = null
+    }
+
+    override fun onItemClicked(item: User) {
+        val intent = Intent(context,RequestVerificationActivity::class.java)
+        val json:String = gson.toJson(item)
+        intent.putExtra("userRequest",json)
+        startActivity(intent)
     }
 }

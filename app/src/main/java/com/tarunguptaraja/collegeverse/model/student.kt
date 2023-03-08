@@ -1,15 +1,23 @@
 package com.tarunguptaraja.collegeverse.model
 
-data class student(
-    val studentId: String,
+import com.google.firebase.Timestamp
+
+data class Student(
+    var studentId: String?,
     val name: String,
     val roll: Long,
+    val enrollmentNumber: Long,
     val phoneNumber: String,
-    val father: String,
-    val mother: String,
+    val email: String,
     val course: String = "B.tech",
     val year: Int,
     val branch: String,
-    val dob: String,
-    val doa: String
-)
+    val userId: String,
+    val role: String,
+    val admissionYear: Int,
+    val currentSemester: Int,
+    @field:JvmField val isCR: Boolean,
+    val timestamp: Timestamp
+) {
+    constructor() : this("", "", 0, 0, "", "", "", 0, "", "", "", 0, 0, false, Timestamp.now())
+}

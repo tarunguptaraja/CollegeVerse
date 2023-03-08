@@ -6,10 +6,11 @@ data class timetable(
     val facultyId: String,
     val branch: String,
     val year: Int,
+    val semester: Int,
     val subject: String,
     val day: String,
     val subjectCode: String,
     val facultyName: String
 ) {
-    constructor() : this(0, 0, "", "", 0, "", "", "", "")
+    constructor() : this(0, 0, "", "", 0, 0, "", "", "", "")
 }

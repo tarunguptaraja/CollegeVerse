@@ -1,7 +1,9 @@
 package com.tarunguptaraja.collegeverse.views
 
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.Menu
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.navigation.findNavController
@@ -12,14 +14,20 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.navigation.NavigationView
 import com.google.android.material.snackbar.Snackbar
+import com.google.gson.Gson
 import com.tarunguptaraja.collegeverse.R
 import com.tarunguptaraja.collegeverse.databinding.ActivityHomeBinding
+import com.tarunguptaraja.collegeverse.model.Student
+import com.tarunguptaraja.collegeverse.model.Teacher
+import com.tarunguptaraja.collegeverse.model.User
+import com.tarunguptaraja.collegeverse.viewmodel.HomeActivityViewModel
 
 
 class HomeActivity : AppCompatActivity() {
 
     private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var viewBinding: ActivityHomeBinding
+    private lateinit var viewModel: HomeActivityViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -38,15 +46,40 @@ class HomeActivity : AppCompatActivity() {
         val navHostFragment: NavHostFragment =
             supportFragmentManager.findFragmentById(R.id.nav_host_fragment_content_home) as NavHostFragment
         val navController = navHostFragment.navController
-        // Passing each menu ID as a set of Ids because each
-        // menu should be considered as top level destinations.
+
+        viewModel = HomeActivityViewModel()
+
+        val sharedPreferences: SharedPreferences =
+            applicationContext.getSharedPreferences("MySharedPref", MODE_PRIVATE)
+        val gson = Gson()
+        var json: String? = sharedPreferences.getString("USER", "")
+        val user: User = gson.fromJson(json, User::class.java)
+        if (user.role == "Student") {
+            json = sharedPreferences.getString("STUDENT", "")
+            val student: Student = gson.fromJson(json, Student::class.java)
+            viewModel.student = student
+        } else {
+            json = sharedPreferences.getString("TEACHER", "")
+            val teacher: Teacher = gson.fromJson(json, Teacher::class.java)
+            viewModel.teacher = teacher
+        }
+        viewModel.user = user
+
         appBarConfiguration = AppBarConfiguration(
             setOf(
-                R.id.nav_home, R.id.nav_gallery, R.id.nav_slideshow
+                R.id.nav_home, R.id.nav_request, R.id.nav_slideshow
             ), drawerLayout
         )
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
+
+        if (user.role == "Teacher" && viewModel.teacher.isHOD)
+            navView.menu.findItem(R.id.nav_request).isVisible = true
+
+        navView.getHeaderView(0).findViewById<TextView>(R.id.username).text = viewModel.user.name
+        navView.getHeaderView(0).findViewById<TextView>(R.id.phone_number).text =
+            viewModel.user.phoneNumber
+
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {

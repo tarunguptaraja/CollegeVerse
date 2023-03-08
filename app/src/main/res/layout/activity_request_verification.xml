@@ -4,14 +4,65 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".views.GetUserDetails">
+    tools:context=".views.RequestVerificationActivity">
 
     <include
         android:id="@+id/toolbar"
         layout="@layout/custom_toolbar"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/enrollment_number"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="24dp"
+        android:background="@drawable/orange_stroke_5dp"
+        android:hint="Enrollment number"
+        android:inputType="number"
+        android:maxLength="15"
+        android:paddingStart="10dp"
+        android:paddingEnd="10dp"
+        android:textColorHint="@color/primary"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar" />
+
+    <EditText
+        android:id="@+id/roll_number"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="24dp"
+        android:layout_marginBottom="8dp"
+        android:background="@drawable/orange_stroke_5dp"
+        android:hint="Roll Number"
+        android:inputType="number"
+        android:maxLength="13"
+        android:paddingStart="10dp"
+        android:paddingEnd="10dp"
+        android:textColor="@color/black"
+        android:textColorHint="@color/primary"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/enrollment_number" />
+
+    <View
+        android:id="@+id/line"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_margin="16dp"
+        android:background="@color/black"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/roll_number" />
 
     <ScrollView
         android:id="@+id/scrollView2"
@@ -19,10 +70,10 @@
         android:layout_height="0dp"
         android:fillViewport="true"
         android:nestedScrollingEnabled="true"
-        app:layout_constraintBottom_toTopOf="@+id/button_verify"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar">
+        app:layout_constraintTop_toBottomOf="@+id/line">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -37,6 +88,9 @@
                 android:layout_marginTop="24dp"
                 android:layout_marginEnd="24dp"
                 android:background="@drawable/orange_stroke_5dp"
+                android:clickable="false"
+                android:cursorVisible="false"
+                android:focusable="false"
                 android:gravity="center_vertical"
                 android:hint="Name"
                 android:inputType="text"
@@ -54,6 +108,9 @@
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="24dp"
                 android:background="@drawable/orange_stroke_5dp"
+                android:clickable="false"
+                android:cursorVisible="false"
+                android:focusable="false"
                 android:gravity="center_vertical"
                 android:hint="Father's Name"
                 android:inputType="text"
@@ -71,6 +128,9 @@
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="24dp"
                 android:background="@drawable/orange_stroke_5dp"
+                android:clickable="false"
+                android:cursorVisible="false"
+                android:focusable="false"
                 android:gravity="center_vertical"
                 android:hint="Mather's Name"
                 android:inputType="text"
@@ -88,6 +148,9 @@
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="24dp"
                 android:background="@drawable/orange_stroke_5dp"
+                android:clickable="false"
+                android:cursorVisible="false"
+                android:focusable="false"
                 android:gravity="center_vertical"
                 android:hint="Email"
                 android:inputType="textEmailAddress"
@@ -105,10 +168,11 @@
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="24dp"
                 android:background="@drawable/orange_stroke_5dp"
+                android:clickable="false"
+                android:cursorVisible="false"
+                android:focusable="false"
                 android:gravity="center_vertical"
-                android:hint="Aadhaar Number"
-                android:inputType="number"
-                android:maxLength="12"
+                android:hint="Aadhar Number"
                 android:paddingStart="10dp"
                 android:paddingEnd="10dp"
                 android:textColor="@color/black"
@@ -123,6 +187,9 @@
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="24dp"
                 android:background="@drawable/orange_stroke_5dp"
+                android:clickable="false"
+                android:cursorVisible="false"
+                android:focusable="false"
                 android:gravity="center_vertical">
 
                 <TextView
@@ -154,18 +221,25 @@
                 android:layout_marginStart="24dp"
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="24dp"
+                android:background="@drawable/orange_stroke_5dp"
+                android:clickable="false"
+                android:cursorVisible="false"
+                android:focusable="false"
                 android:gravity="center_vertical">
 
-                <Spinner
-                    android:id="@+id/spinner_gender"
-                    android:layout_width="match_parent"
+                <TextView
+                    android:id="@+id/textview_gender"
+                    android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_alignParentStart="true"
-                    android:background="@drawable/orange_stroke_5dp"
-                    android:entries="@array/items_gender"
+                    android:layout_marginStart="2dp"
                     android:gravity="center_vertical"
-                    android:paddingStart="2dp"
-                    android:paddingEnd="2dp" />
+                    android:hint="Gender"
+                    android:paddingStart="10dp"
+                    android:paddingEnd="10dp"
+                    android:textColor="@color/black"
+                    android:textColorHint="@color/primary"
+                    android:textSize="14sp" />
 
                 <ImageView
                     android:layout_width="wrap_content"
@@ -182,18 +256,26 @@
                 android:layout_marginStart="24dp"
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="24dp"
+                android:background="@drawable/orange_stroke_5dp"
+                android:clickable="false"
+                android:cursorVisible="false"
+                android:focusable="false"
                 android:gravity="center_vertical">
 
-                <Spinner
-                    android:id="@+id/spinner_role"
-                    android:layout_width="match_parent"
+
+                <TextView
+                    android:id="@+id/textview_role"
+                    android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_alignParentStart="true"
-                    android:background="@drawable/orange_stroke_5dp"
-                    android:entries="@array/items_role"
+                    android:layout_marginStart="2dp"
                     android:gravity="center_vertical"
-                    android:paddingStart="2dp"
-                    android:paddingEnd="2dp" />
+                    android:hint="Student"
+                    android:paddingStart="10dp"
+                    android:paddingEnd="10dp"
+                    android:textColor="@color/black"
+                    android:textColorHint="@color/primary"
+                    android:textSize="14sp" />
 
                 <ImageView
                     android:layout_width="wrap_content"
@@ -210,19 +292,26 @@
                 android:layout_marginStart="24dp"
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="24dp"
+                android:background="@drawable/orange_stroke_5dp"
+                android:clickable="false"
+                android:cursorVisible="false"
+                android:focusable="false"
                 android:gravity="center_vertical">
 
 
-                <Spinner
-                    android:id="@+id/spinner_course"
-                    android:layout_width="match_parent"
+                <TextView
+                    android:id="@+id/textview_course"
+                    android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_alignParentStart="true"
-                    android:background="@drawable/orange_stroke_5dp"
-                    android:entries="@array/items_course"
+                    android:layout_marginStart="2dp"
                     android:gravity="center_vertical"
-                    android:paddingStart="2dp"
-                    android:paddingEnd="2dp" />
+                    android:hint="B.Tech"
+                    android:paddingStart="10dp"
+                    android:paddingEnd="10dp"
+                    android:textColor="@color/black"
+                    android:textColorHint="@color/primary"
+                    android:textSize="14sp" />
 
                 <ImageView
                     android:layout_width="wrap_content"
@@ -239,18 +328,25 @@
                 android:layout_marginStart="24dp"
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="24dp"
+                android:background="@drawable/orange_stroke_5dp"
+                android:clickable="false"
+                android:cursorVisible="false"
+                android:focusable="false"
                 android:gravity="center_vertical">
 
-                <Spinner
-                    android:id="@+id/spinner_branch"
-                    android:layout_width="match_parent"
-                    android:layout_height="48dp"
+                <TextView
+                    android:id="@+id/textview_branch"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
                     android:layout_alignParentStart="true"
-                    android:background="@drawable/orange_stroke_5dp"
-                    android:entries="@array/items_branch"
+                    android:layout_marginStart="2dp"
                     android:gravity="center_vertical"
-                    android:paddingStart="2dp"
-                    android:paddingEnd="2dp" />
+                    android:hint="Computer Science Engineering"
+                    android:paddingStart="10dp"
+                    android:paddingEnd="10dp"
+                    android:textColor="@color/black"
+                    android:textColorHint="@color/primary"
+                    android:textSize="14sp" />
 
                 <ImageView
                     android:layout_width="wrap_content"
@@ -270,10 +366,11 @@
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="24dp"
                 android:background="@drawable/orange_stroke_5dp"
+                android:clickable="false"
+                android:cursorVisible="false"
+                android:focusable="false"
                 android:gravity="center_vertical"
                 android:hint="Admission Year"
-                android:inputType="number"
-                android:maxLength="4"
                 android:paddingStart="10dp"
                 android:paddingEnd="10dp"
                 android:textColor="@color/black"
@@ -288,10 +385,12 @@
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="24dp"
                 android:background="@drawable/orange_stroke_5dp"
+                android:clickable="false"
+                android:cursorVisible="false"
+                android:focusable="false"
+                android:visibility="gone"
                 android:gravity="center_vertical"
                 android:hint="Admission Semester"
-                android:inputType="number"
-                android:maxLength="1"
                 android:paddingStart="10dp"
                 android:paddingEnd="10dp"
                 android:textColor="@color/black"
@@ -306,6 +405,9 @@
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="24dp"
                 android:background="@drawable/orange_stroke_5dp"
+                android:clickable="false"
+                android:cursorVisible="false"
+                android:focusable="false"
                 android:gravity="center_vertical"
                 android:hint="Address Line 1"
                 android:inputType="text"
@@ -323,6 +425,9 @@
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="24dp"
                 android:background="@drawable/orange_stroke_5dp"
+                android:clickable="false"
+                android:cursorVisible="false"
+                android:focusable="false"
                 android:gravity="center_vertical"
                 android:hint="Address Line 2"
                 android:inputType="text"
@@ -340,6 +445,9 @@
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="24dp"
                 android:background="@drawable/orange_stroke_5dp"
+                android:clickable="false"
+                android:cursorVisible="false"
+                android:focusable="false"
                 android:gravity="center_vertical"
                 android:hint="City"
                 android:inputType="text"
@@ -357,6 +465,9 @@
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="24dp"
                 android:background="@drawable/orange_stroke_5dp"
+                android:clickable="false"
+                android:cursorVisible="false"
+                android:focusable="false"
                 android:gravity="center_vertical"
                 android:hint="District"
                 android:inputType="text"
@@ -374,10 +485,11 @@
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="24dp"
                 android:background="@drawable/orange_stroke_5dp"
+                android:clickable="false"
+                android:cursorVisible="false"
+                android:focusable="false"
                 android:gravity="center_vertical"
                 android:hint="Pincode"
-                android:inputType="number"
-                android:maxLength="6"
                 android:paddingStart="10dp"
                 android:paddingEnd="10dp"
                 android:textColor="@color/black"
@@ -391,18 +503,25 @@
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="24dp"
                 android:layout_marginBottom="32dp"
+                android:background="@drawable/orange_stroke_5dp"
+                android:clickable="false"
+                android:cursorVisible="false"
+                android:focusable="false"
                 android:gravity="center_vertical">
 
-                <Spinner
-                    android:id="@+id/spinner_state"
-                    android:layout_width="match_parent"
-                    android:layout_height="48dp"
+                <TextView
+                    android:id="@+id/textview_state"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
                     android:layout_alignParentStart="true"
-                    android:background="@drawable/orange_stroke_5dp"
-                    android:entries="@array/items_states"
+                    android:layout_marginStart="2dp"
                     android:gravity="center_vertical"
-                    android:paddingStart="2dp"
-                    android:paddingEnd="2dp" />
+                    android:hint="Uttar Pradesh"
+                    android:paddingStart="10dp"
+                    android:paddingEnd="10dp"
+                    android:textColor="@color/black"
+                    android:textColorHint="@color/primary"
+                    android:textSize="14sp" />
 
                 <ImageView
                     android:layout_width="wrap_content"
@@ -413,39 +532,49 @@
 
             </RelativeLayout>
 
+            <TextView
+                android:id="@+id/error"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:textAlignment="center"
+                android:layout_marginEnd="24dp"
+                android:visibility="gone"
+                android:layout_marginBottom="12dp"
+                android:text="name should not be empty"
+                android:textColor="@color/red" />
+
+            <TextView
+                android:id="@+id/button_verify"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:layout_marginStart="24dp"
+                android:layout_marginEnd="24dp"
+                android:layout_marginBottom="16dp"
+                android:background="@drawable/button_green"
+                android:gravity="center"
+                android:text="Verify Request"
+                android:textAlignment="center"
+                android:textColor="@color/white"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/button_cancel"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:layout_marginStart="24dp"
+                android:layout_marginEnd="24dp"
+                android:layout_marginBottom="32dp"
+                android:background="@drawable/button_cancel"
+                android:gravity="center"
+                android:text="Cancel Request"
+                android:textAlignment="center"
+                android:textColor="@color/white"
+                android:textSize="16sp" />
+
 
         </LinearLayout>
     </ScrollView>
 
-    <TextView
-        android:id="@+id/error"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:layout_marginEnd="24dp"
-        android:layout_marginBottom="12dp"
-        android:text="name should not be empty"
-        android:textColor="@color/red"
-        android:visibility="gone"
-        app:layout_constraintBottom_toBottomOf="@+id/scrollView2"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <TextView
-        android:id="@+id/button_verify"
-        android:layout_width="match_parent"
-        android:layout_height="48dp"
-        android:layout_marginStart="24dp"
-        android:layout_marginEnd="24dp"
-        android:layout_marginBottom="32dp"
-        android:background="@drawable/custom_button"
-        android:gravity="center"
-        android:text="Send Request"
-        android:textAlignment="center"
-        android:textColor="@color/white"
-        android:textSize="16sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

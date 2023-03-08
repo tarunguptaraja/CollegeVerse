@@ -94,8 +94,11 @@ class UserDetailsViewmodel : ViewModel() {
         val userId = Firebase.auth.currentUser?.uid
         val userDoc = db.collection("users").document(userId!!).get()
         userDoc.await()
-        user = userDoc.result.toObject(User::class.java)!!
-        return userDoc.result.exists()
+        val res:Boolean= userDoc.result.exists()
+        if(res){
+            user = userDoc.result.toObject(User::class.java)!!
+        }
+        return res
     }
 
     fun getUser(): User {
