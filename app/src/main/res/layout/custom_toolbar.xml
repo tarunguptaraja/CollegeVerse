@@ -15,7 +15,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-
         <FrameLayout
             android:id="@+id/fl_back"
             android:layout_width="?attr/actionBarSize"
@@ -38,8 +37,5 @@
             android:textColor="@android:color/white"
             android:textSize="18sp"
             tools:text="@string/app_name" />
-
-
     </RelativeLayout>
-
 </androidx.appcompat.widget.Toolbar>

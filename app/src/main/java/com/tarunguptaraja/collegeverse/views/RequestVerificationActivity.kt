@@ -23,6 +23,9 @@ class RequestVerificationActivity : AppCompatActivity() {
             finish()
         }
         viewBinding.toolbar.tvActivityTitle.text="Pending Request"
+        viewBinding.toolbar.flBack.setOnClickListener {
+            finish()
+        }
 
         val viewModel= RequestVerificationViewmodel()
         val gson= Gson()

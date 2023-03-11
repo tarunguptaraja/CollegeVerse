@@ -28,8 +28,9 @@ class GetUserDetails : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         viewBinding = ActivityGetUserDetailsBinding.inflate(layoutInflater)
         setContentView(viewBinding.root)
-        supportActionBar?.hide()
-
+        viewBinding.toolbar.flBack.setOnClickListener {
+            finish()
+        }
         val viewModel = UserDetailsViewmodel()
 
         val sharedPreferences: SharedPreferences =

@@ -29,6 +29,10 @@ class OTPActivity : AppCompatActivity() {
         setContentView(viewBinding.root)
         supportActionBar?.hide()
 
+        viewBinding.toolbar.flBack.setOnClickListener {
+            finish()
+        }
+
         val sharedPreferences: SharedPreferences =
             applicationContext.getSharedPreferences("MySharedPref", MODE_PRIVATE)
         auth = FirebaseAuth.getInstance()

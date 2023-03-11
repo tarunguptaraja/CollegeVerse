@@ -39,6 +39,9 @@ class LoginActivity : AppCompatActivity() {
         auth = FirebaseAuth.getInstance()
 
         viewBinding.toolbar.tvActivityTitle.text = "Sign In/Sign Up"
+        viewBinding.toolbar.flBack.setOnClickListener {
+            finish()
+        }
 
         val termAndCondition =
             ("<font color=" + Color.BLACK + ">By continuing you agree to </font><font color=" + R.color.primary + ">Terms of Services and Privacy and Legal Policy.</font>")
@@ -56,8 +59,7 @@ class LoginActivity : AppCompatActivity() {
             }
 
             override fun onCodeSent(
-                verificationId: String,
-                token: PhoneAuthProvider.ForceResendingToken
+                verificationId: String, token: PhoneAuthProvider.ForceResendingToken
             ) {
                 storedVerificationId = verificationId
                 resendToken = token
@@ -71,11 +73,12 @@ class LoginActivity : AppCompatActivity() {
         }
 
         viewBinding.edtPhoneNumber.addTextChangedListener(object : TextWatcher {
-            override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {  }
+            override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {}
             override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
-                viewBinding.count.text= s.length.toString()+"/10"
+                viewBinding.count.text = s.length.toString() + "/10"
             }
-            override fun afterTextChanged(s: Editable?) {  }
+
+            override fun afterTextChanged(s: Editable?) {}
         })
 
 

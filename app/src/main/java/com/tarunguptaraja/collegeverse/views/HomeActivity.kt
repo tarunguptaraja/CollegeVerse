@@ -1,5 +1,6 @@
 package com.tarunguptaraja.collegeverse.views
 
+import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.Menu
@@ -13,7 +14,6 @@ import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.navigation.NavigationView
-import com.google.android.material.snackbar.Snackbar
 import com.google.gson.Gson
 import com.tarunguptaraja.collegeverse.R
 import com.tarunguptaraja.collegeverse.databinding.ActivityHomeBinding
@@ -37,9 +37,10 @@ class HomeActivity : AppCompatActivity() {
 
         setSupportActionBar(viewBinding.appBarHome.toolbar)
 
-        viewBinding.appBarHome.fab.setOnClickListener { view ->
-            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                .setAction("Action", null).show()
+        viewBinding.appBarHome.fab.setOnClickListener {
+//            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+//                .setAction("Action", null).show()
+            startActivity(Intent(applicationContext, EventActivity::class.java))
         }
         val drawerLayout: DrawerLayout = viewBinding.drawerLayout
         val navView: NavigationView = viewBinding.navView
@@ -73,8 +74,8 @@ class HomeActivity : AppCompatActivity() {
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
 
-        if (user.role == "Teacher" && viewModel.teacher.isHOD)
-            navView.menu.findItem(R.id.nav_request).isVisible = true
+        if (user.role == "Teacher" && viewModel.teacher.isHOD) navView.menu.findItem(R.id.nav_request).isVisible =
+            true
 
         navView.getHeaderView(0).findViewById<TextView>(R.id.username).text = viewModel.user.name
         navView.getHeaderView(0).findViewById<TextView>(R.id.phone_number).text =
