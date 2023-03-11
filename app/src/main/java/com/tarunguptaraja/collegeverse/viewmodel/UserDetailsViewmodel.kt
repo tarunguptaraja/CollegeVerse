@@ -8,7 +8,6 @@ import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.tarunguptaraja.collegeverse.model.User
 import kotlinx.coroutines.tasks.await
-import java.time.Year
 import java.util.*
 
 class UserDetailsViewmodel : ViewModel() {
@@ -48,7 +47,7 @@ class UserDetailsViewmodel : ViewModel() {
     suspend fun uploadUser():User {
         val fuser = Firebase.auth.currentUser
         fuser?.let {
-            Log.i("notupdated", it.uid)
+            Log.i("UserDetailsViewModel", it.uid)
             userId = it.uid
             phoneNumber = it.phoneNumber.toString()
         }
@@ -81,9 +80,9 @@ class UserDetailsViewmodel : ViewModel() {
         )
 
         val tt = db.collection("users").document(userId).set(muser).addOnSuccessListener {
-            Log.i("notupdated", "success")
+            Log.i("UserDetailsViewModel", "success")
         }.addOnFailureListener {
-            Log.i("notupdated", it.stackTrace.toString())
+            Log.i("UserDetailsViewModel", it.stackTrace.toString())
         }
 
         tt.await()

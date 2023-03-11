@@ -10,12 +10,12 @@
             android:title="@string/menu_home" />
         <item
             android:id="@+id/nav_request"
+            android:visible="false"
             android:icon="@drawable/ic_baseline_pending_actions_24"
             android:title="@string/menu_request" />
         <item
-            android:id="@+id/nav_slideshow"
-            android:visible="false"
+            android:id="@+id/nav_create_event"
             android:icon="@drawable/ic_menu_slideshow"
-            android:title="@string/menu_slideshow" />
+            android:title="@string/menu_create_event" />
     </group>
 </menu>

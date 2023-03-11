@@ -1,10 +1,10 @@
-package com.tarunguptaraja.collegeverse.views.ui.slideshow
+package com.tarunguptaraja.collegeverse.views.ui.createEvent
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 
-class SlideshowViewModel : ViewModel() {
+class CreateEventViewModel : ViewModel() {
 
     private val _text = MutableLiveData<String>().apply {
         value = "This is slideshow Fragment"

@@ -55,7 +55,7 @@ class GetUserDetails : AppCompatActivity() {
 
         val myCalendar: Calendar = Calendar.getInstance()
 
-        val date = OnDateSetListener { view, year, month, day ->
+        val date = OnDateSetListener { _, year, month, day ->
             myCalendar.set(Calendar.YEAR, year)
             myCalendar.set(Calendar.MONTH, month)
             myCalendar.set(Calendar.DAY_OF_MONTH, day)
@@ -206,6 +206,11 @@ class GetUserDetails : AppCompatActivity() {
             }
             currentYear= (currentSem+1)/2
 
+            if(currentYear>4 || currentSem>8){
+                viewBinding.error.text = "Admission Semester or Admission Year is not correct"
+                viewBinding.error.visibility = View.VISIBLE
+                iserror=true
+            }
             if (isStudent) {
                 if (sem.isEmpty()) {
                     viewBinding.error.text = "Admission Semester cannot be empty"

@@ -1,4 +1,4 @@
-package com.tarunguptaraja.collegeverse.views.ui.slideshow
+package com.tarunguptaraja.collegeverse.views.ui.createEvent
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -7,11 +7,11 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import com.tarunguptaraja.collegeverse.databinding.FragmentSlideshowBinding
+import com.tarunguptaraja.collegeverse.databinding.FragmentCreateEventBinding
 
-class SlideshowFragment : Fragment() {
+class CreateEventFragment : Fragment() {
 
-    private var viewBinding: FragmentSlideshowBinding? = null
+    private var viewBinding: FragmentCreateEventBinding? = null
 
     // This property is only valid between onCreateView and
     // onDestroyView.
@@ -22,14 +22,14 @@ class SlideshowFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val slideshowViewModel =
-            ViewModelProvider(this)[SlideshowViewModel::class.java]
+        val createEventViewModel =
+            ViewModelProvider(this)[CreateEventViewModel::class.java]
 
-        viewBinding = FragmentSlideshowBinding.inflate(inflater, container, false)
+        viewBinding = FragmentCreateEventBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
         val textView: TextView = binding.textSlideshow
-        slideshowViewModel.text.observe(viewLifecycleOwner) {
+        createEventViewModel.text.observe(viewLifecycleOwner) {
             textView.text = it
         }
         return root

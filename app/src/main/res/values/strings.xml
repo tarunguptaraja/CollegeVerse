@@ -84,6 +84,6 @@
 
     <string name="menu_home">Timetable</string>
     <string name="menu_request">Pending Request</string>
-    <string name="menu_slideshow">Slideshow</string>
+    <string name="menu_create_event">Create Event</string>
 
 </resources>

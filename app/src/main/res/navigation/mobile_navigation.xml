@@ -18,8 +18,8 @@
         tools:layout="@layout/fragment_request" />
 
     <fragment
-        android:id="@+id/nav_slideshow"
-        android:name="com.tarunguptaraja.collegeverse.views.ui.slideshow.SlideshowFragment"
-        android:label="@string/menu_slideshow"
-        tools:layout="@layout/fragment_slideshow" />
+        android:id="@+id/nav_create_event"
+        android:name="com.tarunguptaraja.collegeverse.views.ui.createEvent.CreateEventFragment"
+        android:label="@string/menu_create_event"
+        tools:layout="@layout/fragment_create_event" />
 </navigation>

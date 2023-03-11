@@ -7,21 +7,17 @@ import android.os.Handler
 import android.os.Looper
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.FirebaseApp
-import com.google.firebase.firestore.ktx.firestore
-import com.google.firebase.ktx.Firebase
 import com.tarunguptaraja.collegeverse.databinding.ActivitySplashScreenBinding
 
 
 class SplashScreen : AppCompatActivity() {
 
     private lateinit var viewBinding: ActivitySplashScreenBinding
-    val db = Firebase.firestore
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         viewBinding = ActivitySplashScreenBinding.inflate(layoutInflater)
         setContentView(viewBinding.root)
-        supportActionBar?.hide()
 
         FirebaseApp.initializeApp(applicationContext)
 
